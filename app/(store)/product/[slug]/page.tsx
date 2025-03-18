@@ -50,7 +50,7 @@ async function ProductPage({
                                 <PortableText value={product.description} />
                             )}
                         </div>
-                    </div>|
+                    </div>
                 </div>
             </div>
         </div>
