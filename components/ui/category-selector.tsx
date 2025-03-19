@@ -61,7 +61,7 @@ export function CategorySelectorComponent({
                                 );
                                 if (selectedCategory?.slug?.current) {
                                     setValue(selectedCategory._id);
-                                    router.push('/categories/${selectedCategory.slug.current}');
+                                    router.push(`/categories/${selectedCategory.slug.current}`);
                                     setOpen(false);
                                 }
                             }
@@ -76,7 +76,7 @@ export function CategorySelectorComponent({
                                     value={category.title}
                                     onSelect={() => {
                                         setValue(value === category._id ? "" : category._id);
-                                        router.push('/categories/${category.slug ?. current}');
+                                        router.push(`/categories/${category.slug?.current}`);
                                         setOpen(false);
                                     }}
                                 >
