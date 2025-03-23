@@ -1,5 +1,6 @@
 "use client"
 
+import { createCheckoutSession, Metadata } from "@/actions/createCheckoutSession";
 import AddToBasketButton from "@/components/AddToBasketButton";
 import Loader from "@/components/Loader";
 import { imageUrl } from "@/lib/imageUrl";
@@ -33,6 +34,30 @@ function BasketPage() {
                 <p className="text-gray-600 text-lg" > Your basket is empty.</p>
             </div >
         )
+    }
+
+    const handleCheckout = async () => {
+        if (!isSignedIn) return;
+        setIsLoading(true);
+
+        try {
+            const metadata: Metadata = {
+                orderNumber: crypto.randomUUID(), // example: ab3lks-asl1ks-k5sljs-lksjøf
+                customerName: user?.fullName ?? "Unknown",
+                customerEmail: user?.emailAddresses[0].emailAddress ?? "Unknown",
+                clerkUserId: user!.id,
+            };
+
+            const checkoutUrl = await createCheckoutSession(groupedItems, metadata);
+
+            // if (checkoutUrl) {
+            //     window.location.href = checkoutUrl;
+            // }
+        } catch (error) {
+            console.error("Error creating checkout session:", error);
+        } finally {
+            setIsLoading(false)
+        }
     }
 
     return (
@@ -99,7 +124,7 @@ function BasketPage() {
 
                     {isSignedIn ? (
                         <button
-                            // onClick={handleChedkout}
+                            onClick={handleCheckout}
                             disabled={isLoading}
                             className="mt-4 w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 disabled:bg-gray-400 "
                         >
