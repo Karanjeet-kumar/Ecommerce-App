@@ -5,7 +5,7 @@ import AddToBasketButton from "@/components/AddToBasketButton";
 import Loader from "@/components/Loader";
 import { imageUrl } from "@/lib/imageUrl";
 import useBasketStore from "@/store/store";
-import { SignInButton, useAuth, useUser } from "@clerk/nextjs";
+import { useAuth, useUser } from "@clerk/nextjs";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -122,21 +122,14 @@ function BasketPage() {
                         </p>
                     </div>
 
-                    {isSignedIn ? (
-                        <button
-                            onClick={handleCheckout}
-                            disabled={isLoading}
-                            className="mt-4 w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 disabled:bg-gray-400 "
-                        >
-                            {isLoading ? "Processing..." : "Checkout"}
-                        </button>
-                    ) : (
-                        <SignInButton mode="modal">
-                            <button className="mt-4 w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-                                Sign in to Checkout
-                            </button>
-                        </SignInButton>
-                    )}
+                    <button
+                        onClick={handleCheckout}
+                        disabled={isLoading}
+                        className="mt-4 w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 disabled:bg-gray-400 "
+                    >
+                        {isLoading ? "Processing..." : "Checkout"}
+                    </button>
+
                 </div>
 
                 <div className="h-64 lg:h-0">
